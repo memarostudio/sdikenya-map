@@ -1,6 +1,6 @@
 // Function to load the SVG into the #sdi-map element
 function loadSVG() {
-    fetch('../assets/sdi-map.svg') // Path to the SVG file
+    fetch('https://memarostudio.github.io/sdikenya-map/assets/sdi-map.svg') // Path to the SVG file
         .then(response => response.text())
         .then(svgContent => {
             document.getElementById('sdi-map').innerHTML = svgContent;
@@ -11,7 +11,7 @@ function loadSVG() {
 
 // Function to load the CSV file and parse it into JSON
 function loadTooltipData() {
-    fetch('../data/map-tooltip-data.csv') // Path to the CSV file
+    fetch('https://memarostudio.github.io/sdikenya-map/data/map-tooltip-data.csv') // Path to the CSV file
         .then(response => response.text())
         .then(csvContent => {
             const tooltipData = parseCSV(csvContent);
