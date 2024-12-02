@@ -1,9 +1,18 @@
 // Function to load the SVG into the #sdi-map element
 function loadSVG() {
-    fetch('https://memarostudio.github.io/sdikenya-map/assets/sdi-map.svg') // Path to the SVG file
+    fetch('https://memarostudio.github.io/sdikenya-map/assets/sdi-map.svg') // Updated path to the SVG file
         .then(response => response.text())
         .then(svgContent => {
-            document.getElementById('sdi-map').innerHTML = svgContent;
+            const mapContainer = document.getElementById('sdi-map');
+            mapContainer.innerHTML = svgContent;
+
+            // Ensure the SVG scales to the width of its parent
+            const svgElement = mapContainer.querySelector('svg');
+            if (svgElement) {
+                svgElement.style.width = '100%';
+                svgElement.style.height = 'auto';
+            }
+
             loadTooltipData(); // Load the CSV data and add interaction
         })
         .catch(error => console.error('Error loading SVG:', error));
@@ -11,7 +20,7 @@ function loadSVG() {
 
 // Function to load the CSV file and parse it into JSON
 function loadTooltipData() {
-    fetch('https://memarostudio.github.io/sdikenya-map/data/map-tooltip-data.csv') // Path to the CSV file
+    fetch('https://memarostudio.github.io/sdikenya-map/data/map-tooltip-data.csv') // Updated path to the CSV file
         .then(response => response.text())
         .then(csvContent => {
             const tooltipData = parseCSV(csvContent);
@@ -37,7 +46,7 @@ function parseCSV(csvContent) {
 
 // Function to add tooltip interaction
 function addTooltipInteraction(tooltipData) {
-    const svgElement = document.getElementById('sdi-map');
+    const svgElement = document.getElementById('sdi-map').querySelector('svg');
 
     if (!svgElement) {
         console.error('SVG element not found!');
